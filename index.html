@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F FOR FIT</title>
+  <script defer src="theme.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/ico">
+  <style>
+    * {box-sizing: border-box;}
+    
+    .img-comp-container {
+      position: relative;
+      height: 524px; /*should be the same height as the images*/
+    }
+    
+    .img-comp-img {
+      position: absolute;
+      width: auto;
+      height: auto;
+      overflow:hidden;
+    }
+    
+    .img-comp-img img {
+      display:block;
+    }
+    
+    .img-comp-slider {
+      position: absolute;
+      z-index:9;
+      cursor: ew-resize;
+      width: 40px;
+      height: 40px;
+      background-color: #FF1818;
+      border-radius:0 50% 0 50%;
+    }
+    </style>
+    <script>
+    function initComparisons() {
+      var x, i;
+      x = document.getElementsByClassName("img-comp-overlay");
+      for (i = 0; i < x.length; i++) {
+        compareImages(x[i]);
+      }
+      function compareImages(img) {
+        var slider, img, clicked = 0, w, h;
+        w = img.offsetWidth;
+        h = img.offsetHeight;
+        img.style.width = (w / 2) + "px";
+        slider = document.createElement("DIV");
+        slider.setAttribute("class", "img-comp-slider");
+        img.parentElement.insertBefore(slider, img);
+        slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+        slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+        slider.addEventListener("mousedown", slideReady);
+        window.addEventListener("mouseup", slideFinish);
+        slider.addEventListener("touchstart", slideReady);
+        window.addEventListener("touchend", slideFinish);
+        function slideReady(e) {
+          e.preventDefault();
+          clicked = 1;
+          window.addEventListener("mousemove", slideMove);
+          window.addEventListener("touchmove", slideMove);
+        }
+        function slideFinish() {
+          clicked = 0;
+        }
+        function slideMove(e) {
+          var pos;
+          if (clicked == 0) return false;
+          pos = getCursorPos(e)
+          if (pos < 0) pos = 0;
+          if (pos > w) pos = w;
+          slide(pos);
+        }
+        function getCursorPos(e) {
+          var a, x = 0;
+          e = (e.changedTouches) ? e.changedTouches[0] : e;
+          a = img.getBoundingClientRect();
+          x = e.pageX - a.left;
+          x = x - window.pageXOffset;
+          return x;
+        }
+        function slide(x) {
+          img.style.width = x + "px";
+          slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+        }
+      }
+    }
+    </script>
+</head>
+<body>
+  <script src="https://kit.fontawesome.com/456680bf44.js" crossorigin="anonymous"></script>
+  <nav class="navbar">
+    <ul class="navbar-nav">
+      <li class="logo">
+        <a href="#hero" class="nav-link f">
+          <span class="link-text logo-text"><span class="f1">F</span> FOR <span class="f1">F</span>IT</span>
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fad"
+            data-icon="angle-double-right"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+            class="svg-inline--fa fa-angle-double-right fa-w-14 fa-5x"
+          >
+            <g class="fa-group">
+              <path
+                fill="currentColor"
+                d="M224 273L88.37 409a23.78 23.78 0 0 1-33.8 0L32 386.36a23.94 23.94 0 0 1 0-33.89l96.13-96.37L32 159.73a23.94 23.94 0 0 1 0-33.89l22.44-22.79a23.78 23.78 0 0 1 33.8 0L223.88 239a23.94 23.94 0 0 1 .1 34z"
+              ></path>
+              <path
+                fill="currentColor"
+                d="M415.89 273L280.34 409a23.77 23.77 0 0 1-33.79 0L224 386.26a23.94 23.94 0 0 1 0-33.89L320.11 256l-96-96.47a23.94 23.94 0 0 1 0-33.89l22.52-22.59a23.77 23.77 0 0 1 33.79 0L416 239a24 24 0 0 1-.11 34z"
+                class="fa-primary"
+              ></path>
+            </g>
+          </svg>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" class="nav-link login" onclick="document.getElementById('id01').style.display='block'">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fad"
+            data-icon="cat"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            class="svg-inline--fa fa-cat fa-w-16 fa-9x"
+          >
+            <g class="fa-group">
+              <path
+                fill="currentColor"
+                d="M20.77,165.2C9.32,165.2,0,174.52,0,185.98c0,11.44,9.31,20.76,20.77,20.76h87.45V165.2H20.77z"
+              ></path>
+              <path
+                fill="currentColor"
+                d="M410.96,0h-233.5c-38.18,0-69.24,31.05-69.24,69.22v2.17v93.81h187.1l-40.01-40.02c-8.09-8.1-8.09-21.28,0-29.37c3.92-3.92,9.13-6.09,14.68-6.09c5.57,0,10.77,2.16,14.7,6.09l75.47,75.48c1.89,1.89,3.39,4.12,4.46,6.66c1.11,2.73,1.62,5.36,1.62,8.04c0,2.67-0.51,5.31-1.54,7.83c-1.11,2.67-2.61,4.89-4.49,6.81l-75.53,75.52c-3.94,3.92-9.17,6.07-14.7,6.07c-5.54,0-10.78-2.15-14.68-6.07c-8.09-8.12-8.09-21.29,0-29.39l40.02-40.01h-187.1v22.72v41.71v31.56c0,38.15,31.06,69.2,69.24,69.2h233.5c38.18,0,69.22-31.05,69.22-69.2V69.22C480.18,31.05,449.14,0,410.96,0z"class="fa-primary"
+              ></path>
+            </g>
+          </svg>
+          <span class="link-text">LOGIN</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#result" class="nav-link">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fad"
+            data-icon="alien-monster"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 576 512"
+            class="svg-inline--fa fa-alien-monster fa-w-18 fa-9x"
+          >
+            <g class="fa-group">
+              <path
+                fill="currentColor"
+                d="M308.1,277.95c0,35.7-28.9,64.6-64.6,64.6s-64.6-28.9-64.6-64.6s28.9-64.6,64.6-64.6S308.1,242.25,308.1,277.95zM440.3,116.05c25.8,0,46.7,20.9,46.7,46.7v122.4v103.8c0,27.5-22.3,49.8-49.8,49.8H49.8c-27.5,0-49.8-22.3-49.8-49.8v-103.9v-122.3l0,0c0-25.8,20.9-46.7,46.7-46.7h93.4l4.4-18.6c6.7-28.8,32.4-49.2,62-49.2h74.1c29.6,0,55.3,20.4,62,49.2l4.3,18.6H440.3zM97.4,183.45c0-12.9-10.5-23.4-23.4-23.4c-13,0-23.5,10.5-23.5,23.4s10.5,23.4,23.4,23.4C86.9,206.95,97.4,196.45,97.4,183.45zM358.7,277.95c0-63.6-51.6-115.2-115.2-115.2s-115.2,51.6-115.2,115.2s51.6,115.2,115.2,115.2S358.7,341.55,358.7,277.95z"
+                class="fa-primary"
+              ></path>
+            </g>
+          </svg>
+          <span class="link-text">RESULT</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#course" class="nav-link">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fad"
+            data-icon="space-station-moon-alt"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            class="svg-inline--fa fa-space-station-moon-alt fa-w-16 fa-5x"
+          >
+            <g class="fa-group">
+              <path
+                fill="currentColor"
+                d="M502.664,154.144c-0.043-64.195-52.072-116.202-116.245-116.202c-60.161,0-109.04,45.838-115.059,104.381H34.492C15.531,142.302,0,157.833,0,176.793v249.25c0,19.004,15.531,34.492,34.492,34.492h249.25c19.004,0,34.578-15.488,34.578-34.492v-178.11c14.258,10.354,30.911,17.515,49.009,20.514l0.496,27.05l-16.61,5.565v148.601c0,0,15.962,16.394,36.886,14.97c20.881-1.402,33.435-14.927,33.435-14.927l0.022-148.623l-15.509-3.818l-0.453-28.819C460.622,259.215,502.621,211.738,502.664,154.144z M386.397,243.641c-49.376,0-89.454-40.079-89.454-89.519s40.035-89.454,89.497-89.454c49.375-0.065,89.454,39.992,89.497,89.519C475.895,203.584,435.902,243.641,386.397,243.641zM258.785,392.199H59.449v-22.692h199.336V392.199z M258.785,312.797H59.449v-22.736h199.336V312.797z M258.785,233.417H59.449
+                v-22.736h199.336V233.417z"
+                class="fa-primary"
+              ></path>
+            </g>
+          </svg>
+          <span class="link-text">COURSES</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#contact" class="nav-link">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fad"
+            data-icon="space-shuttle"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 640 512"
+            class="svg-inline--fa fa-space-shuttle fa-w-20 fa-5x"
+          >
+            <g class="fa-group">
+              
+              <path
+                fill="currentColor"
+                d="M477.76,48.059l-13.82-13.822c-45.66-45.687-119.721-45.614-165.269,0.006l-49.858,49.859c5.533-0.611,10.979-1.624,16.627-1.624c22.741,0,44.464,5.531,64.392,15.043l16.062-16.063c19.82-19.889,51.551-19.276,70.826,0l13.826,13.826c19.805,19.805,19.341,51.483,0.032,70.794l-136.44,136.454c-19.69,19.757-51.487,19.404-70.761,0.066c-10.679-10.654-17.617-15.984-23.356-28.065l-48.41,48.41c8.979,12.043,12.077,14.434,24.43,26.758c45.408,45.653,119.641,45.805,165.316,0.051L477.77,213.324C523.376,167.776,523.448,93.682,477.76,48.059z"/>
+
+              <path
+                fill="currentColor"
+                d="M336.942,161.235c-45.66-45.687-119.721-45.614-165.269,0.006L34.135,298.761c-46.606,46.498-44.461,120.683,0.165,165.226l13.743,13.71c45.408,45.653,119.641,45.805,165.317,0.051l61.195-61.219c-5.231,0.545-10.514,0.863-15.848,0.863c0,0,0,0-0.011,0c-22.807,0-44.739-5.2-64.682-14.743l-27.875,27.882c-19.69,19.756-51.486,19.404-70.761,0.066l-13.924-13.891c-19.514-19.514-19.676-51.151-0.162-70.663l137.606-137.588c19.819-19.889,51.548-19.276,70.826,0c9.653,9.654,18.147,16.633,23.47,27.797l48.196-48.198C352.464,176.128,349.815,174.109,336.942,161.235z"
+                class="fa-primary"
+              ></path>
+            </g>
+          </svg>
+          <span class="link-text">CONTACT</span>
+        </a>
+      </li>
+      
+
+      <li class="nav-item" id="themeButton">
+        <a href="#" class="nav-link">
+          <svg
+            class="theme-icon"
+            id="darkIcon"
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fad"
+            data-icon="moon-stars"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            class="svg-inline--fa fa-moon-stars fa-w-16 fa-7x"
+          >
+            <g class="fa-group">
+              <path
+                fill="currentColor"
+                d="M320 32L304 0l-16 32-32 16 32 16 16 32 16-32 32-16zm138.7 149.3L432 128l-26.7 53.3L352 208l53.3 26.7L432 288l26.7-53.3L512 208z"
+                class="fa-secondary"
+              ></path>
+              <path
+                fill="currentColor"
+                d="M332.2 426.4c8.1-1.6 13.9 8 8.6 14.5a191.18 191.18 0 0 1-149 71.1C85.8 512 0 426 0 320c0-120 108.7-210.6 227-188.8 8.2 1.6 10.1 12.6 2.8 16.7a150.3 150.3 0 0 0-76.1 130.8c0 94 85.4 165.4 178.5 147.7z"
+                class="fa-primary"
+              ></path>
+            </g>
+          </svg>
+          <svg
+            class="theme-icon"
+            id="lightIcon"
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fad"
+            data-icon="sun"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            class="svg-inline--fa fa-sun fa-w-16 fa-7x"
+          >
+            <g class="fa-group">
+              <path
+                fill="currentColor"
+                d="M502.42 240.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.41-94.8a17.31 17.31 0 0 0-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4a17.31 17.31 0 0 0 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.41-33.5 47.3 94.7a17.31 17.31 0 0 0 31 0l47.31-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3a17.33 17.33 0 0 0 .2-31.1zm-155.9 106c-49.91 49.9-131.11 49.9-181 0a128.13 128.13 0 0 1 0-181c49.9-49.9 131.1-49.9 181 0a128.13 128.13 0 0 1 0 181z"class="fa-primary"
+              ></path>
+              <path
+                fill="currentColor"
+                d="M352 256a96 96 0 1 1-96-96 96.15 96.15 0 0 1 96 96z"
+              ></path>
+            </g>
+          </svg>
+          <span class="link-text">THEME</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="id01" class="modal">
+  
+    <form class="modal-content animate" action="/action_page.php" style="max-width: 500px;" method="post">
+      <div class="container">
+        
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+  
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+          
+        <button type="submit">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+      </div>
+  
+      <div class="container">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>
+    </form>
+  </div>
+
+  <div class="page">
+
+      <div id="hero">
+        <div class="containerText">
+          <h1>FFORFIT</h1>
+        </div>
+      </div>
+
+      
+
+    <div id="result">
+    <h2 class="title">Results</h2>
+    <div class="b-a">
+      <div class="img-comp-container">
+        <div class="img-comp-img">
+          <img src="before 1.png" width="372px" height="524px">
+        </div>
+        <div class="img-comp-img img-comp-overlay">
+          <img src="after 1.png" width="372px" height="524px">
+        </div>
+      </div>
+      
+      <script>
+      initComparisons();
+      </script>
+    </div>
+
+    </div>
+    <h2 class="title" id="course">Courses</h2>
+    <div id="courses">
+      <div class="s-course">
+        <div class="symbol">
+          <i class="fa-solid fa-dumbbell"></i>
+        </div>
+        <div class="info">
+          <h3 style="font-family: cursive;">Muscle Gain Program</h3>
+          <p style="font-family: cursive;">High/Medium/Low intensity Muscle Gain Programs For Advanced And Begginers (You Can Choose Your Own Prefrences Later).</p>
+        </div>
+      </div>
+      <div class="s-course">
+        <div class="symbol">
+          <i class="fa-solid fa-weight-scale"></i>
+        </div>
+        <div class="info">
+          <h3 style="font-family: cursive;">Weight Loss Program</h3>
+          <p style="font-family: cursive;">High/Medium/Low intensity Weight Loss Programs For Advanced And Begginers (You Can Choose Your Own Prefrences Later).</p>
+        </div>
+      </div>
+      <div class="s-course">
+        <div class="symbol">
+          <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="info">
+          <h3 style="font-family: cursive;">Others</h3>
+          <p style="font-family: cursive;">You Can Choose Costume Programs.</p>
+        </div>
+      </div>
+    </div>
+  
+    <div id="contact">
+      <div class="main">
+        <div class="footer">
+          <div class="bubbles">
+              <div class="bubble" style="--size:2.0756640184215636rem; --distance:7.040511556176381rem; --position:30.52892076914582%; --time:2.3583970646404504s; --delay:-3.4727405942483696s;"></div>
+              <div class="bubble" style="--size:3.427120585056824rem; --distance:8.475097406078905rem; --position:-1.9265862231955722%; --time:2.6275853599220262s; --delay:-3.0418273975703882s;"></div>
+              <div class="bubble" style="--size:2.674664493911888rem; --distance:8.764035758697313rem; --position:82.3399155866087%; --time:2.072056638656784s; --delay:-3.8277683663713895s;"></div>
+              <div class="bubble" style="--size:2.2978853953357836rem; --distance:8.304127889819599rem; --position:75.379181569855%; --time:3.2009064423108646s; --delay:-3.165673903727637s;"></div>
+              <div class="bubble" style="--size:4.078207272125822rem; --distance:7.704871410802318rem; --position:65.32190114625716%; --time:2.9903141711507213s; --delay:-3.1115458786273957s;"></div>
+              <div class="bubble" style="--size:4.412569968802419rem; --distance:6.917709918350712rem; --position:0.7836251999207988%; --time:2.425252915944595s; --delay:-2.9689934915970797s;"></div>
+              <div class="bubble" style="--size:4.716173126803608rem; --distance:6.258496644625666rem; --position:45.60070946215559%; --time:2.8973996858840465s; --delay:-3.364811816882614s;"></div>
+              <div class="bubble" style="--size:5.568254575497095rem; --distance:7.210984720706971rem; --position:39.580193587220975%; --time:3.427190449958055s; --delay:-3.432921743048367s;"></div>
+              <div class="bubble" style="--size:5.918955158836802rem; --distance:7.892249903688589rem; --position:50.96400390151676%; --time:2.397837349944459s; --delay:-3.795751174014972s;"></div>
+              <div class="bubble" style="--size:2.665254588505075rem; --distance:6.562447035160776rem; --position:95.03846847988916%; --time:2.639465953181009s; --delay:-3.748633718905618s;"></div>
+              <div class="bubble" style="--size:2.770404695120069rem; --distance:9.30813466971064rem; --position:63.26339523183475%; --time:3.787205615682712s; --delay:-2.372495731051404s;"></div>
+              <div class="bubble" style="--size:5.152102475656598rem; --distance:7.41485058630789rem; --position:39.25334043731169%; --time:3.4422067449617333s; --delay:-2.481860372974896s;"></div>
+              <div class="bubble" style="--size:4.722214778995409rem; --distance:8.400293614131023rem; --position:63.09637551472312%; --time:2.962916728706278s; --delay:-3.113049607033953s;"></div>
+              <div class="bubble" style="--size:3.9281962185585124rem; --distance:6.778513798116615rem; --position:90.88070562810273%; --time:2.140707013146426s; --delay:-3.419970863384729s;"></div>
+              <div class="bubble" style="--size:3.8138806114594397rem; --distance:6.759131561168704rem; --position:75.24159660859246%; --time:3.0104429828845745s; --delay:-2.3750636688573956s;"></div>
+              <div class="bubble" style="--size:3.382295089104259rem; --distance:7.06915815937605rem; --position:4.007610539641355%; --time:2.57884981720571s; --delay:-3.9399174812071185s;"></div>
+              <div class="bubble" style="--size:4.691723879642106rem; --distance:7.921785442075844rem; --position:19.369173322688813%; --time:3.6124767178471258s; --delay:-2.7747081722875278s;"></div>
+              <div class="bubble" style="--size:5.806957421659893rem; --distance:8.937388977872324rem; --position:4.790645913597547%; --time:3.398591069687971s; --delay:-2.947737422317828s;"></div>
+              <div class="bubble" style="--size:5.629602102650814rem; --distance:8.577013934241792rem; --position:0.7253585269371072%; --time:2.11891595136758s; --delay:-3.8630657010484857s;"></div>
+              <div class="bubble" style="--size:2.918049744340798rem; --distance:6.283981693130718rem; --position:7.429809849898517%; --time:3.187670848114687s; --delay:-3.2628174175504134s;"></div>
+              <div class="bubble" style="--size:4.797838870848584rem; --distance:6.005246488012967rem; --position:60.94531036690073%; --time:3.7746113483255397s; --delay:-3.4961859638434905s;"></div>
+              <div class="bubble" style="--size:3.5255118552932307rem; --distance:9.338271162506626rem; --position:94.49112366438673%; --time:2.1441138092176266s; --delay:-3.456933095606935s;"></div>
+              <div class="bubble" style="--size:2.949782648647324rem; --distance:9.617918672493378rem; --position:95.13222795082264%; --time:2.0540152100655087s; --delay:-3.36157518780014s;"></div>
+              <div class="bubble" style="--size:5.392746659952264rem; --distance:8.21333836541237rem; --position:38.741319320061486%; --time:2.5931185814557547s; --delay:-3.2553829090591537s;"></div>
+              <div class="bubble" style="--size:2.532560246634099rem; --distance:6.384602357109738rem; --position:18.72262429051401%; --time:2.365271331196495s; --delay:-3.0040034292891256s;"></div>
+              <div class="bubble" style="--size:5.843506030260372rem; --distance:8.985095401213373rem; --position:32.35612893636081%; --time:2.1821703898421094s; --delay:-2.082367490199964s;"></div>
+          </div>
+          <div class="content">
+            
+              <div style="display: block;" id="fa">
+                <a href="#" class="fa fa-facebook" style="color: var(--text-secondary);"></a>
+                <a href="#" class="fa fa-twitter" style="color: var(--text-secondary);"></a>
+                <a href="#" class="fa fa-instagram" style="color: var(--text-secondary);"></a>
+                <a href="#" class="fa fa-github" style="color: var(--text-secondary);"></a>
+                <a href="#" class="fa fa-linkedin" style="color: var(--text-secondary);"></a>
+              </div>
+              <div>
+                <img src="Untitled-2-01.png" alt="logo" width="200px">
+              </div>
+          </div>
+      </div>
+      <svg style="position:fixed; top:100vh">
+          <defs>
+              <filter id="blob">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+                  <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="blob"></feColorMatrix>
+                  <feComposite in="SourceGraphic" in2="blob" operator="atop"></feComposite>
+              </filter>
+          </defs>
+      </svg>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
